@@ -32,9 +32,7 @@ class HomePage extends StatelessWidget {
       body: Column(
         children: const [
           CustomTopBar(),
-
           SizedBox(height: 40),
-
           Text(
             "Conteúdo da página",
             style: TextStyle(color: Colors.white),
@@ -53,52 +51,62 @@ class CustomTopBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 18),
-      decoration: const BoxDecoration(
-        color: Colors.white,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 18),
+      color: Colors.white,
       child: Column(
         children: [
-          // LINHA SUPERIOR
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              // LOGO (USE DEV)
-              const Text(
-                "USE\nDEV",
-                style: TextStyle(
-                  fontSize: 16,
-                  height: 1,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 2,
+          // 🔥 LINHA SUPERIOR CORRIGIDA
+          SizedBox(
+            width: double.infinity,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                // ESQUERDA (LOGO)
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: const Text(
+                    "USE\nDEV",
+                    style: TextStyle(
+                      fontSize: 16,
+                      height: 1,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 2,
+                    ),
+                  ),
                 ),
-              ),
 
-              // MENU DIREITA
-              Row(
-                children: const [
-                  Text(
-                    "Sobre nós",
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.black87,
-                    ),
+                // CENTRO (SOBRE NÓS)
+                const Text(
+                  "Sobre nós",
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.black87,
+                    fontWeight: FontWeight.w500,
                   ),
-                  SizedBox(width: 30),
-                  Text(
-                    "Login",
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.black87,
-                    ),
+                ),
+
+                // DIREITA (LOGIN + ÍCONES)
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: const [
+                      Text(
+                        "Login",
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.black87,
+                        ),
+                      ),
+                      SizedBox(width: 15),
+                      Icon(Icons.person_outline, size: 20),
+                      SizedBox(width: 15),
+                      Icon(Icons.shopping_cart_outlined, size: 20),
+                    ],
                   ),
-                  SizedBox(width: 15),
-                  Icon(Icons.person_outline, size: 20),
-                  SizedBox(width: 15),
-                  Icon(Icons.shopping_cart_outlined, size: 20),
-                ],
-              ),
-            ],
+                ),
+              ],
+            ),
           ),
 
           const SizedBox(height: 20),
@@ -108,7 +116,7 @@ class CustomTopBar extends StatelessWidget {
             height: 50,
             padding: const EdgeInsets.symmetric(horizontal: 20),
             decoration: BoxDecoration(
-              color: const Color(0xFFEDEDED),
+              color: Color(0xFFEDEDED),
               borderRadius: BorderRadius.circular(30),
             ),
             child: Row(
