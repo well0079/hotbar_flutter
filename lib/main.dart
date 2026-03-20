@@ -4,7 +4,7 @@ void main() {
   runApp(const MyApp());
 }
 
-// App principal
+// APP PRINCIPAL
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -12,106 +12,121 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Hotbar App',
-      theme: ThemeData.dark(),
-      home: const MainPage(),
+      title: 'Use Dev',
+      theme: ThemeData(
+        fontFamily: 'Arial',
+      ),
+      home: const HomePage(),
     );
   }
 }
 
-// Tela principal com navegação
-class MainPage extends StatefulWidget {
-  const MainPage({Key? key}) : super(key: key);
-
-  @override
-  State<MainPage> createState() => _MainPageState();
-}
-
-class _MainPageState extends State<MainPage> {
-  int currentIndex = 0;
-
-  final List<Widget> pages = const [
-    Center(child: Text("Home")),
-    Center(child: Text("Busca")),
-    Center(child: Text("Perfil")),
-  ];
-
-  void changeTab(int index) {
-    setState(() {
-      currentIndex = index;
-    });
-  }
+// TELA PRINCIPAL
+class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: pages[currentIndex],
-      bottomNavigationBar: CustomHotbar(
-        currentIndex: currentIndex,
-        onTap: changeTab,
+      backgroundColor: const Color(0xFF0B0F1A),
+      body: Column(
+        children: const [
+          CustomTopBar(),
+
+          SizedBox(height: 40),
+
+          Text(
+            "Conteúdo da página",
+            style: TextStyle(color: Colors.white),
+          ),
+        ],
       ),
     );
   }
 }
 
-// Hotbar personalizada
-class CustomHotbar extends StatelessWidget {
-  final int currentIndex;
-  final Function(int) onTap;
-
-  const CustomHotbar({
-    Key? key,
-    required this.currentIndex,
-    required this.onTap,
-  }) : super(key: key);
-
-  Widget buildItem(IconData icon, int index) {
-    bool isSelected = currentIndex == index;
-
-    return GestureDetector(
-      onTap: () {
-        onTap(index);
-      },
-      child: Container(
-        padding: const EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          color: isSelected ? Colors.blueAccent : Colors.transparent,
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: Icon(
-          icon,
-          color: isSelected ? Colors.white : Colors.grey,
-          size: 26,
-        ),
-      ),
-    );
-  }
+// 🔝 TOPBAR
+class CustomTopBar extends StatelessWidget {
+  const CustomTopBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 0, 20, 15),
-      child: Container(
-        height: 65,
-        decoration: BoxDecoration(
-          color: const Color(0xFF1E1E1E),
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: const [
-            BoxShadow(
-              color: Colors.black54,
-              blurRadius: 10,
-              offset: Offset(0, 5),
-            )
-          ],
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            buildItem(Icons.home, 0),
-            buildItem(Icons.search, 1),
-            buildItem(Icons.person, 2),
-          ],
-        ),
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 18),
+      decoration: const BoxDecoration(
+        color: Colors.white,
+      ),
+      child: Column(
+        children: [
+          // LINHA SUPERIOR
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              // LOGO (USE DEV)
+              const Text(
+                "USE\nDEV",
+                style: TextStyle(
+                  fontSize: 16,
+                  height: 1,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 2,
+                ),
+              ),
+
+              // MENU DIREITA
+              Row(
+                children: const [
+                  Text(
+                    "Sobre nós",
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  SizedBox(width: 30),
+                  Text(
+                    "Login",
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  SizedBox(width: 15),
+                  Icon(Icons.person_outline, size: 20),
+                  SizedBox(width: 15),
+                  Icon(Icons.shopping_cart_outlined, size: 20),
+                ],
+              ),
+            ],
+          ),
+
+          const SizedBox(height: 20),
+
+          // 🔍 BARRA DE BUSCA
+          Container(
+            height: 50,
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            decoration: BoxDecoration(
+              color: const Color(0xFFEDEDED),
+              borderRadius: BorderRadius.circular(30),
+            ),
+            child: Row(
+              children: const [
+                Expanded(
+                  child: Text(
+                    "O que você procura?",
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
+                Icon(Icons.search, color: Colors.black54),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
