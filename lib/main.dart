@@ -43,7 +43,7 @@ class HomePage extends StatelessWidget {
   }
 }
 
-// 🔝 TOPBAR
+// TOPBAR
 class CustomTopBar extends StatelessWidget {
   const CustomTopBar({Key? key}) : super(key: key);
 
@@ -55,7 +55,7 @@ class CustomTopBar extends StatelessWidget {
       color: Colors.white,
       child: Column(
         children: [
-          // 🔥 LINHA SUPERIOR CORRIGIDA
+          // LINHA SUPERIOR CORRIGIDA
           SizedBox(
             width: double.infinity,
             child: Stack(
@@ -111,7 +111,7 @@ class CustomTopBar extends StatelessWidget {
 
           const SizedBox(height: 20),
 
-          // 🔍 BARRA DE BUSCA
+          // BARRA DE BUSCA
           Container(
             height: 50,
             padding: const EdgeInsets.symmetric(horizontal: 20),
